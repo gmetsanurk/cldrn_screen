@@ -13,6 +13,7 @@
 		66D4189E2D63903A00098DCE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418982D63903A00098DCE /* Model.swift */; };
 		66D4189F2D63903A00098DCE /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418992D63903A00098DCE /* PersonCell.swift */; };
 		66D418A02D63903A00098DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66D418942D63903A00098DCE /* Assets.xcassets */; };
+		66D418A32D63971300098DCE /* AddChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418A22D63971300098DCE /* AddChildCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		66D418972D63903A00098DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66D418982D63903A00098DCE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		66D418992D63903A00098DCE /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		66D418A22D63971300098DCE /* AddChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				66D418982D63903A00098DCE /* Model.swift */,
 				66D418992D63903A00098DCE /* PersonCell.swift */,
 				66D418952D63903A00098DCE /* ChildCell.swift */,
+				66D418A22D63971300098DCE /* AddChildCell.swift */,
 			);
 			path = cldrn_screen;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66D418A32D63971300098DCE /* AddChildCell.swift in Sources */,
 				66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */,
 				66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */,
 				66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */,

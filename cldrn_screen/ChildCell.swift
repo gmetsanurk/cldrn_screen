@@ -16,6 +16,7 @@ class ChildCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +26,6 @@ class ChildCell: UICollectionViewCell {
     private func setupUI() {
         setupTextFiedldsUI()
         setupDeleteButton()
-        
         contentView.addSubview(stackView)
         setupConstraints()
     }
@@ -34,14 +34,12 @@ class ChildCell: UICollectionViewCell {
         nameTextField.placeholder = "Имя"
         ageTextField.placeholder = "Возраст"
         ageTextField.keyboardType = .numberPad
-        
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
     
     private func setupDeleteButton() {
         deleteButton.setTitle("Удалить", for: .normal)
-        
         deleteButton.addAction(UIAction { [weak self] _ in
             self?.deleteTapped()
         }, for: .touchUpInside)

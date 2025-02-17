@@ -12,5 +12,10 @@ class HomeScreen: UIViewController {
         view.backgroundColor = UIColor.white
     }
     
-    
+}
+
+extension HomeScreen {
+    private func setupCollectonView() {
+        
+    }
 }

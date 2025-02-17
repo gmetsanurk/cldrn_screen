@@ -22,15 +22,17 @@ class PersonCell: UICollectionViewCell {
     }
     
     private func setupUI() {
+        setupTextFieldsUI()
+        contentView.addSubview(stackView)
+        setupConstraints()
+    }
+    
+    private func setupTextFieldsUI() {
         nameTextField.placeholder = "Имя"
         ageTextField.placeholder = "Возраст"
         ageTextField.keyboardType = .numberPad
-        
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
-        
-        contentView.addSubview(stackView)
-        setupConstraints()
     }
     
     private func setupConstraints() {

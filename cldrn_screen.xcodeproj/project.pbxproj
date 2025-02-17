@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		66D4186B2D63851600098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */ = {
+		66D4187B2D6387B400098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -24,7 +24,7 @@
 		66D418412D637FA000098DCE /* cldrn_screen */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				66D4186B2D63851600098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */,
+				66D4187B2D6387B400098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */,
 			);
 			path = cldrn_screen;
 			sourceTree = "<group>";

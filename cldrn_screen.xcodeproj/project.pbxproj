@@ -6,30 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418932D63903A00098DCE /* AppDelegate.swift */; };
+		66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418952D63903A00098DCE /* ChildCell.swift */; };
+		66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418962D63903A00098DCE /* HomeScreen .swift */; };
+		66D4189E2D63903A00098DCE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418982D63903A00098DCE /* Model.swift */; };
+		66D4189F2D63903A00098DCE /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418992D63903A00098DCE /* PersonCell.swift */; };
+		66D418A02D63903A00098DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66D418942D63903A00098DCE /* Assets.xcassets */; };
+		66D418A32D63971300098DCE /* AddChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418A22D63971300098DCE /* AddChildCell.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		66D4183F2D637FA000098DCE /* cldrn_screen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cldrn_screen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		66D418932D63903A00098DCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		66D418942D63903A00098DCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		66D418952D63903A00098DCE /* ChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildCell.swift; sourceTree = "<group>"; };
+		66D418962D63903A00098DCE /* HomeScreen .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeScreen .swift"; sourceTree = "<group>"; };
+		66D418972D63903A00098DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66D418982D63903A00098DCE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		66D418992D63903A00098DCE /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		66D418A22D63971300098DCE /* AddChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		66D4187B2D6387B400098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 66D4183E2D637FA000098DCE /* cldrn_screen */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		66D418412D637FA000098DCE /* cldrn_screen */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				66D4187B2D6387B400098DCE /* Exceptions for "cldrn_screen" folder in "cldrn_screen" target */,
-			);
-			path = cldrn_screen;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		66D4183C2D637FA000098DCE /* Frameworks */ = {
@@ -45,7 +42,7 @@
 		66D418362D637FA000098DCE = {
 			isa = PBXGroup;
 			children = (
-				66D418412D637FA000098DCE /* cldrn_screen */,
+				66D4189A2D63903A00098DCE /* cldrn_screen */,
 				66D418402D637FA000098DCE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +53,21 @@
 				66D4183F2D637FA000098DCE /* cldrn_screen.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		66D4189A2D63903A00098DCE /* cldrn_screen */ = {
+			isa = PBXGroup;
+			children = (
+				66D418932D63903A00098DCE /* AppDelegate.swift */,
+				66D418942D63903A00098DCE /* Assets.xcassets */,
+				66D418962D63903A00098DCE /* HomeScreen .swift */,
+				66D418972D63903A00098DCE /* Info.plist */,
+				66D418982D63903A00098DCE /* Model.swift */,
+				66D418992D63903A00098DCE /* PersonCell.swift */,
+				66D418952D63903A00098DCE /* ChildCell.swift */,
+				66D418A22D63971300098DCE /* AddChildCell.swift */,
+			);
+			path = cldrn_screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +84,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				66D418412D637FA000098DCE /* cldrn_screen */,
 			);
 			name = cldrn_screen;
 			packageProductDependencies = (
@@ -122,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66D418A02D63903A00098DCE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +142,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66D418A32D63971300098DCE /* AddChildCell.swift in Sources */,
+				66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */,
+				66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */,
+				66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */,
+				66D4189E2D63903A00098DCE /* Model.swift in Sources */,
+				66D4189F2D63903A00098DCE /* PersonCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

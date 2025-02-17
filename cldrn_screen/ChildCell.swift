@@ -1,16 +1,18 @@
 import UIKit
 
-class PersonCell: UICollectionViewCell {
-    
+class ChildCell: UICollectionViewCell {
     let nameTextField = UITextField()
     let ageTextField = UITextField()
+    var deleteButton = UIButton(type: .system)
     
     private let stackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.spacing = 8
-            return stack
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        return stack
     }()
+    
+    var onDelete: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,19 +22,27 @@ class PersonCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupUI() {
-        setupTextFieldsUI()
+        setupTextFiedldsUI()
+        setupDeleteButton()
         contentView.addSubview(stackView)
         setupConstraints()
     }
     
-    private func setupTextFieldsUI() {
+    private func setupTextFiedldsUI() {
         nameTextField.placeholder = "Имя"
         ageTextField.placeholder = "Возраст"
         ageTextField.keyboardType = .numberPad
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
+    }
+    
+    private func setupDeleteButton() {
+        deleteButton.setTitle("Удалить", for: .normal)
+        deleteButton.addAction(UIAction { [weak self] _ in
+            self?.deleteTapped()
+        }, for: .touchUpInside)
     }
     
     private func setupConstraints() {
@@ -43,5 +53,9 @@ class PersonCell: UICollectionViewCell {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
+    }
+    
+    @objc private func deleteTapped() {
+        onDelete?()
     }
 }

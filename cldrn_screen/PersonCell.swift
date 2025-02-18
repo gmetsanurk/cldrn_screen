@@ -2,8 +2,8 @@ import UIKit
 
 class PersonCell: UICollectionViewCell {
     
-    let nameTextField = UITextField()
-    let ageTextField = UITextField()
+    let nameTextField = CustomTextField()
+    let ageTextField = CustomTextField()
     
     private let stackView: UIStackView = {
             let stack = UIStackView()
@@ -29,35 +29,10 @@ class PersonCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        setupNameTextField()
-        setupAgetextField()
+        nameTextField.setupNameTextField(placeholder: "Имя")
+        ageTextField.setupNameTextField(placeholder: "Возраст", isNumeric: true)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
-    }
-    
-    func setupNameTextField() {
-        nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Имя",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
-        )
-        nameTextField.textColor = AppColors.personCellTextColor
-        nameTextField.layer.borderColor = AppColors.borderColor
-        nameTextField.layer.borderWidth = 1.0
-        nameTextField.layer.cornerRadius = AppGeometry.cornerRadius
-        nameTextField.clipsToBounds = true
-    }
-    
-    func setupAgetextField() {
-        ageTextField.attributedPlaceholder = NSAttributedString(
-            string: "Возраст",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
-        )
-        ageTextField.textColor = AppColors.personCellTextColor
-        ageTextField.layer.borderColor = AppColors.borderColor
-        ageTextField.layer.borderWidth = 1.0
-        ageTextField.layer.cornerRadius = AppGeometry.cornerRadius
-        ageTextField.clipsToBounds = true
-        ageTextField.keyboardType = .numberPad
     }
     
     private func setupConstraints() {
@@ -73,7 +48,6 @@ class PersonCell: UICollectionViewCell {
             
             ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
             ageTextField.heightAnchor.constraint(equalToConstant: 64)
-
         ])
     }
 }

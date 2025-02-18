@@ -1,14 +1,15 @@
 import UIKit
 
 class ChildCell: UICollectionViewCell {
-    let nameTextField = UITextField()
-    let ageTextField = UITextField()
+    let nameTextField = CustomTextField()
+    let ageTextField = CustomTextField()
     var deleteButton = UIButton(type: .system)
     
     private let stackView: UIStackView = {
         let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.spacing = 8
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.alignment = .leading
         return stack
     }()
     
@@ -31,17 +32,8 @@ class ChildCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Имя",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.childCellTextAligmentColor]
-        )
-        nameTextField.textColor = AppColors.childCellTextColor
-        ageTextField.attributedPlaceholder = NSAttributedString(
-            string: "Возраст",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.childCellTextAligmentColor]
-        )
-        ageTextField.textColor = AppColors.childCellTextColor
-        ageTextField.keyboardType = .numberPad
+        nameTextField.setupNameTextField(placeholder: "Имя")
+        ageTextField.setupNameTextField(placeholder: "Возраст", isNumeric: true)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
@@ -60,7 +52,13 @@ class ChildCell: UICollectionViewCell {
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            nameTextField.heightAnchor.constraint(equalToConstant: 64),
+            
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            ageTextField.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     

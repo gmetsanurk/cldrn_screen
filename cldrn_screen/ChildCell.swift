@@ -58,7 +58,7 @@ class ChildCell: UICollectionViewCell {
             
             deleteButton.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
             deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -90),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
             
             nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             nameTextField.heightAnchor.constraint(equalToConstant: 64),

@@ -6,9 +6,10 @@ struct AppColors {
     static let personCellTextAligmentColor = UIColor.gray
     static let childCellTextColor = UIColor.black
     static let childCellTextAligmentColor = UIColor.gray
+    static let borderColor = UIColor.lightGray.cgColor
 }
 
 struct AppGeometry {
-    static let cornerRadius = 10.0
+    static let cornerRadius = 5.0
 }
 

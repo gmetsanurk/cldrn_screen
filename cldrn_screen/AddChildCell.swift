@@ -15,13 +15,13 @@ class AddChildCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        setupAdButton()
+        setupAddButton()
         addSubview(addButton)
         setupConstraints()
     }
     
-    private func setupAdButton() {
-        addButton.setTitle("Удалить", for: .normal)
+    private func setupAddButton() {
+        addButton.setTitle("Добавить ребенка", for: .normal)
         addButton.addAction(UIAction { [weak self] _ in
             self?.addTapped()
         }, for: .touchUpInside)

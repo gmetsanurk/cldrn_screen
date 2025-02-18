@@ -24,13 +24,13 @@ class ChildCell: UICollectionViewCell {
     }
 
     private func setupUI() {
-        setupTextFiedldsUI()
+        setupTextFieldsUI()
         setupDeleteButton()
         contentView.addSubview(stackView)
         setupConstraints()
     }
     
-    private func setupTextFiedldsUI() {
+    private func setupTextFieldsUI() {
         nameTextField.placeholder = "Имя"
         ageTextField.placeholder = "Возраст"
         ageTextField.keyboardType = .numberPad
@@ -43,6 +43,7 @@ class ChildCell: UICollectionViewCell {
         deleteButton.addAction(UIAction { [weak self] _ in
             self?.deleteTapped()
         }, for: .touchUpInside)
+        stackView.addArrangedSubview(deleteButton)
     }
     
     private func setupConstraints() {

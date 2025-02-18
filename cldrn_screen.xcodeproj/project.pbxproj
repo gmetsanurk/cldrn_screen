@@ -16,7 +16,6 @@
 		66D418A32D63971300098DCE /* AddChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418A22D63971300098DCE /* AddChildCell.swift */; };
 		66D418B52D6461CB00098DCE /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B42D6461CB00098DCE /* AppColors.swift */; };
 		66D418B72D64890600098DCE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B62D64890600098DCE /* CustomTextField.swift */; };
-		66D418B92D64C4DC00098DCE /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B82D64C4D100098DCE /* BaseCell.swift */; };
 		66D418BC2D64D57000098DCE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418BB2D64D55B00098DCE /* UIView+Extension.swift */; };
 		66D418BE2D64D70800098DCE /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418BD2D64D70800098DCE /* UICollectionView+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -33,7 +32,6 @@
 		66D418A22D63971300098DCE /* AddChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildCell.swift; sourceTree = "<group>"; };
 		66D418B42D6461CB00098DCE /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		66D418B62D64890600098DCE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		66D418B82D64C4D100098DCE /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		66D418BB2D64D55B00098DCE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		66D418BD2D64D70800098DCE /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,7 +72,6 @@
 				66D418962D63903A00098DCE /* HomeScreen .swift */,
 				66D418972D63903A00098DCE /* Info.plist */,
 				66D418982D63903A00098DCE /* Model.swift */,
-				66D418B82D64C4D100098DCE /* BaseCell.swift */,
 				66D418992D63903A00098DCE /* PersonCell.swift */,
 				66D418952D63903A00098DCE /* ChildCell.swift */,
 				66D418A22D63971300098DCE /* AddChildCell.swift */,
@@ -170,7 +167,6 @@
 				66D418B72D64890600098DCE /* CustomTextField.swift in Sources */,
 				66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */,
 				66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */,
-				66D418B92D64C4DC00098DCE /* BaseCell.swift in Sources */,
 				66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */,
 				66D418B52D6461CB00098DCE /* AppColors.swift in Sources */,
 				66D4189E2D63903A00098DCE /* Model.swift in Sources */,

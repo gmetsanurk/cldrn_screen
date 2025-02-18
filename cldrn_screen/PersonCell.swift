@@ -1,6 +1,17 @@
 import UIKit
 
-class PersonCell: BasePersonCell {
+class PersonCell: UICollectionViewCell {
+    let nameTextField = CustomTextField()
+    let ageTextField = CustomTextField()
+    
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 10
+        stack.alignment = .leading
+        return stack
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -31,10 +42,10 @@ class PersonCell: BasePersonCell {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 330),
             nameTextField.heightAnchor.constraint(equalToConstant: 64),
             
-            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 330),
             ageTextField.heightAnchor.constraint(equalToConstant: 64)
         ])
     }

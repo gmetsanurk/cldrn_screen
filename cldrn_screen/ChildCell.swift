@@ -31,8 +31,16 @@ class ChildCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.placeholder = "Имя"
-        ageTextField.placeholder = "Возраст"
+        nameTextField.attributedPlaceholder = NSAttributedString(
+            string: "Имя",
+            attributes: [NSAttributedString.Key.foregroundColor: AppColors.childCellTextAligmentColor]
+        )
+        nameTextField.textColor = AppColors.childCellTextColor
+        ageTextField.attributedPlaceholder = NSAttributedString(
+            string: "Возраст",
+            attributes: [NSAttributedString.Key.foregroundColor: AppColors.childCellTextAligmentColor]
+        )
+        ageTextField.textColor = AppColors.childCellTextColor
         ageTextField.keyboardType = .numberPad
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)

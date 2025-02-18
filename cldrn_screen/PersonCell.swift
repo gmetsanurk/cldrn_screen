@@ -28,8 +28,16 @@ class PersonCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.placeholder = "Имя"
-        ageTextField.placeholder = "Возраст"
+        nameTextField.attributedPlaceholder = NSAttributedString(
+            string: "Имя",
+            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
+        )
+        nameTextField.textColor = AppColors.personCellTextColor
+        ageTextField.attributedPlaceholder = NSAttributedString(
+            string: "Возраст",
+            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
+        )
+        ageTextField.textColor = AppColors.personCellTextColor
         ageTextField.keyboardType = .numberPad
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)

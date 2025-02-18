@@ -13,7 +13,8 @@ class AddChildCell: UICollectionViewCell {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Дети (макс. 5)"
-        label.font = UIFont.systemFont(ofSize: 22, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.textColor = AppColors.childCellTextColor
         return label
     }()
     
@@ -52,7 +53,7 @@ class AddChildCell: UICollectionViewCell {
             
             addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             addButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            addButton.widthAnchor.constraint(equalToConstant: 160),
+            addButton.widthAnchor.constraint(equalToConstant: 180),
             addButton.heightAnchor.constraint(equalToConstant: 44),
             
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: addButton.leadingAnchor, constant: -8)

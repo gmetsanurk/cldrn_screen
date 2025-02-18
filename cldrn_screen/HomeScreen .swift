@@ -17,7 +17,7 @@ class HomeScreen: UIViewController {
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self

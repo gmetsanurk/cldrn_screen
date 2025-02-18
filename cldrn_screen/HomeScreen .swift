@@ -52,21 +52,26 @@ extension HomeScreen: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             return cell
         } else {
-            if indexPath.item < person.children.count {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
-                cell.onDelete = {
-                    self.person.children.remove(at: indexPath.item)
-                    self.collectionView.reloadData()
+            if indexPath.item == 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
+                cell.onAdd = {
+                    let newChild = Child(name: "", age: "")
+                    self.person.children.append(newChild)
+                    
+                    let newIndexPath = IndexPath(item: self.person.children.count, section: 1)
+                    self.collectionView.insertItems(at: [newIndexPath])
                 }
                 return cell
             } else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
-                cell.onAdd = {
-                    self.person.children.append(Child(name: "", age: ""))
-                    self.collectionView.reloadData()
+                let childIndex = indexPath.item - 1
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
+                cell.onDelete = {
+                    self.person.children.remove(at: childIndex)
+                    self.collectionView.deleteItems(at: [indexPath])
                 }
                 return cell
             }
         }
     }
+
 }

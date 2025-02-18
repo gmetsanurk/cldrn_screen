@@ -1,7 +1,18 @@
 import UIKit
 
 class AddChildCell: UICollectionViewCell {
-    let addButton = UIButton(type: .system)
+    private let addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Добавить ребенка", for: .normal)
+        return button
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Дети (макс. 5)"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        return label
+    }()
     
     var onAdd: (() -> Void)?
     
@@ -15,23 +26,31 @@ class AddChildCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        setupAddButton()
+        addSubview(titleLabel)
         addSubview(addButton)
-        setupConstraints()
-    }
-    
-    private func setupAddButton() {
-        addButton.setTitle("Добавить ребенка", for: .normal)
+        
         addButton.addAction(UIAction { [weak self] _ in
             self?.onAdd?()
         }, for: .primaryActionTriggered)
+        
+        setupConstraints()
     }
     
     private func setupConstraints() {
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        addButton.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
         NSLayoutConstraint.activate([
-            addButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            addButton.centerYAnchor.constraint(equalTo: centerYAnchor)
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            addButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            addButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: addButton.leadingAnchor, constant: -8)
         ])
     }
 }

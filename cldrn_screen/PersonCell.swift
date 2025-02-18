@@ -2,13 +2,14 @@ import UIKit
 
 class PersonCell: UICollectionViewCell {
     
-    let nameTextField = UITextField()
-    let ageTextField = UITextField()
+    let nameTextField = CustomTextField()
+    let ageTextField = CustomTextField()
     
     private let stackView: UIStackView = {
             let stack = UIStackView()
             stack.axis = .vertical
-            stack.spacing = 8
+            stack.distribution = .fillProportionally
+            stack.spacing = 10
             return stack
     }()
     
@@ -28,17 +29,8 @@ class PersonCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.attributedPlaceholder = NSAttributedString(
-            string: "Имя",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
-        )
-        nameTextField.textColor = AppColors.personCellTextColor
-        ageTextField.attributedPlaceholder = NSAttributedString(
-            string: "Возраст",
-            attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
-        )
-        ageTextField.textColor = AppColors.personCellTextColor
-        ageTextField.keyboardType = .numberPad
+        nameTextField.setupNameTextField(placeholder: "Имя")
+        ageTextField.setupNameTextField(placeholder: "Возраст", isNumeric: true)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
@@ -46,10 +38,17 @@ class PersonCell: UICollectionViewCell {
     private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
+            nameTextField.heightAnchor.constraint(equalToConstant: 64),
+            
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 320),
+            ageTextField.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
 }
+

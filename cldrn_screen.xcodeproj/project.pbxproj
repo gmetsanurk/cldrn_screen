@@ -15,6 +15,7 @@
 		66D418A02D63903A00098DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66D418942D63903A00098DCE /* Assets.xcassets */; };
 		66D418A32D63971300098DCE /* AddChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418A22D63971300098DCE /* AddChildCell.swift */; };
 		66D418B52D6461CB00098DCE /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B42D6461CB00098DCE /* AppColors.swift */; };
+		66D418B72D64890600098DCE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B62D64890600098DCE /* CustomTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		66D418992D63903A00098DCE /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
 		66D418A22D63971300098DCE /* AddChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildCell.swift; sourceTree = "<group>"; };
 		66D418B42D6461CB00098DCE /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		66D418B62D64890600098DCE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				66D418992D63903A00098DCE /* PersonCell.swift */,
 				66D418952D63903A00098DCE /* ChildCell.swift */,
 				66D418A22D63971300098DCE /* AddChildCell.swift */,
+				66D418B62D64890600098DCE /* CustomTextField.swift */,
 			);
 			path = cldrn_screen;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66D418A32D63971300098DCE /* AddChildCell.swift in Sources */,
+				66D418B72D64890600098DCE /* CustomTextField.swift in Sources */,
 				66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */,
 				66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */,
 				66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */,

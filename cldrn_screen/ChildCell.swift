@@ -1,19 +1,8 @@
 import UIKit
 
-class ChildCell: UICollectionViewCell {
-    let nameTextField = CustomTextField()
-    let ageTextField = CustomTextField()
-    var deleteButton = UIButton(type: .system)
-    
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.spacing = 10
-        stack.alignment = .leading
-        return stack
-    }()
-    
+class ChildCell: BasePersonCell {
     var onDelete: (() -> Void)?
+    var deleteButton = UIButton(type: .system)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,8 +30,8 @@ class ChildCell: UICollectionViewCell {
     private func setupDeleteButton() {
         deleteButton.setTitle("Удалить", for: .normal)
         deleteButton.addAction(UIAction { [weak self] _ in
-            self?.deleteTapped()
-        }, for: .touchUpInside)
+            self?.onDelete?()
+        }, for: .primaryActionTriggered)
         stackView.addArrangedSubview(deleteButton)
     }
     
@@ -60,9 +49,5 @@ class ChildCell: UICollectionViewCell {
             ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             ageTextField.heightAnchor.constraint(equalToConstant: 64)
         ])
-    }
-    
-    @objc private func deleteTapped() {
-        onDelete?()
     }
 }

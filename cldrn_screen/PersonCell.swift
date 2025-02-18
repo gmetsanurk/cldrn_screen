@@ -1,18 +1,6 @@
 import UIKit
 
-class PersonCell: UICollectionViewCell {
-    
-    let nameTextField = CustomTextField()
-    let ageTextField = CustomTextField()
-    
-    private let stackView: UIStackView = {
-            let stack = UIStackView()
-            stack.axis = .vertical
-            stack.distribution = .fillProportionally
-            stack.spacing = 10
-            return stack
-    }()
-    
+class PersonCell: BasePersonCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

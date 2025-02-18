@@ -23,8 +23,8 @@ class AddChildCell: UICollectionViewCell {
     private func setupAddButton() {
         addButton.setTitle("Добавить ребенка", for: .normal)
         addButton.addAction(UIAction { [weak self] _ in
-            self?.addTapped()
-        }, for: .touchUpInside)
+            self?.onAdd?()
+        }, for: .primaryActionTriggered)
     }
     
     private func setupConstraints() {
@@ -34,8 +34,5 @@ class AddChildCell: UICollectionViewCell {
             addButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
-    
-    @objc private func addTapped() {
-        onAdd?()
-    }
 }
+

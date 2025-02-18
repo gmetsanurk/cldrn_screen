@@ -1,6 +1,6 @@
 import UIKit
 
-class HomeScreen: UIViewController, UICollectionViewDelegate {
+class HomeScreen: UIViewController {
     
     private var collectionView: UICollectionView!
     
@@ -20,18 +20,17 @@ class HomeScreen: UIViewController, UICollectionViewDelegate {
         layout.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
         collectionView.dataSource = self
         
         registerCellsToTheCollectionView()
         view.addSubview(collectionView)
-        setupCollectionViewConstraints()
+        collectionView.fillToSuperview()
     }
     
     private func registerCellsToTheCollectionView() {
-        collectionView.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
-        collectionView.register(ChildCell.self, forCellWithReuseIdentifier: "ChildCell")
-        collectionView.register(AddChildCell.self, forCellWithReuseIdentifier: "AddChildCell")
+        collectionView.register(cellWithClass: PersonCell.self)
+        collectionView.register(cellWithClass: ChildCell.self)
+        collectionView.register(cellWithClass: AddChildCell.self)
     }
 }
 
@@ -69,17 +68,5 @@ extension HomeScreen: UICollectionViewDataSource {
                 return cell
             }
         }
-    }
-}
-
-extension HomeScreen {
-    private func setupCollectionViewConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }

@@ -6,13 +6,15 @@ class HomeScreen: UIViewController, UICollectionViewDelegate {
     
     private var person = Person(name: "", age: "", children: [])
     
+    private let maxChildrenCount = 5
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollectonView()
+        setupCollectionView()
         view.backgroundColor = UIColor.white
     }
     
-    private func setupCollectonView() {
+    private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
@@ -39,7 +41,11 @@ extension HomeScreen: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 1 : person.children.count
+        if section == 0 {
+                return 1
+            } else {
+                return person.children.count + (person.children.count < maxChildrenCount ? 1 : 0)
+            }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

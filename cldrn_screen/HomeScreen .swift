@@ -1,6 +1,6 @@
 import UIKit
 
-class HomeScreen: UIViewController, UICollectionViewDelegate {
+class HomeScreen: UIViewController {
     
     private var collectionView: UICollectionView!
     
@@ -17,21 +17,20 @@ class HomeScreen: UIViewController, UICollectionViewDelegate {
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
-        collectionView.delegate = self
         collectionView.dataSource = self
         
         registerCellsToTheCollectionView()
         view.addSubview(collectionView)
-        setupCollectionViewConstraints()
+        collectionView.fillToSuperview()
     }
     
     private func registerCellsToTheCollectionView() {
-        collectionView.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
-        collectionView.register(ChildCell.self, forCellWithReuseIdentifier: "ChildCell")
-        collectionView.register(AddChildCell.self, forCellWithReuseIdentifier: "AddChildCell")
+        collectionView.register(cellWithClass: PersonCell.self)
+        collectionView.register(cellWithClass: ChildCell.self)
+        collectionView.register(cellWithClass: AddChildCell.self)
     }
 }
 
@@ -53,33 +52,26 @@ extension HomeScreen: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             return cell
         } else {
-            if indexPath.item < person.children.count {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
-                cell.onDelete = {
-                    self.person.children.remove(at: indexPath.item)
-                    self.collectionView.reloadData()
+            if indexPath.item == 0 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
+                cell.onAdd = {
+                    let newChild = Child(name: "", age: "")
+                    self.person.children.append(newChild)
+                    
+                    let newIndexPath = IndexPath(item: self.person.children.count, section: 1)
+                    self.collectionView.insertItems(at: [newIndexPath])
                 }
                 return cell
             } else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
-                cell.onAdd = {
-                    self.person.children.append(Child(name: "", age: ""))
-                    self.collectionView.reloadData()
+                let childIndex = indexPath.item - 1
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
+                cell.onDelete = {
+                    self.person.children.remove(at: childIndex)
+                    self.collectionView.deleteItems(at: [indexPath])
                 }
                 return cell
             }
         }
     }
-}
 
-extension HomeScreen {
-    private func setupCollectionViewConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
 }

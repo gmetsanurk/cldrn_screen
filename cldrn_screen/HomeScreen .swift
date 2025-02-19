@@ -1,10 +1,11 @@
 import UIKit
+import CoreData
 
 class HomeScreen: UIViewController {
     
     private var collectionView: UICollectionView!
-    
-    private var person = Person(name: "", age: "", children: [])
+    private var person: CoreDataPerson?
+    private var tempChildren: [CoreDataChild] = []
     
     private let maxChildrenCount = 5
     
@@ -21,7 +22,6 @@ class HomeScreen: UIViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
-        
         registerCellsToTheCollectionView()
         view.addSubview(collectionView)
         collectionView.fillToSuperview()
@@ -36,6 +36,7 @@ class HomeScreen: UIViewController {
 }
 
 extension HomeScreen: UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -44,45 +45,84 @@ extension HomeScreen: UICollectionViewDataSource {
         if section == 0 {
             return 1
         } else {
-            let childrenCount = person.children.count
+            let childrenCount = tempChildren.count
             let addButtonCount = childrenCount < maxChildrenCount ? 1 : 0
             return childrenCount + addButtonCount + 1
         }
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             return cell
         } else {
-            let childrenCount = person.children.count
+            let childrenCount = tempChildren.count
             let addButtonIndex = childrenCount < maxChildrenCount ? 0 : -1
             let clearButtonIndex = childrenCount + (addButtonIndex == 0 ? 1 : 0)
             
             if indexPath.item == addButtonIndex {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
-                cell.onAdd = {
-                    let newChild = Child(name: "", age: "")
-                    self.person.children.append(newChild)
-                    self.collectionView.reloadData()
+                cell.onAdd = { [weak self] in
+                    self?.addChildToPerson()
                 }
                 return cell
             } else if indexPath.item == clearButtonIndex {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClearButtonCell", for: indexPath) as! ClearButtonCell
                 cell.onClearTapped = {
-                    self.person.children.removeAll()
-                    self.collectionView.reloadData()
+                    self.deletePerson()
                 }
                 return cell
             } else {
                 let childIndex = indexPath.item - (addButtonIndex == 0 ? 1 : 0)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
+                let child = tempChildren[childIndex]
+                cell.child = child
                 cell.onDelete = {
-                    self.person.children.remove(at: childIndex)
-                    self.collectionView.reloadData()
+                    self.deleteChild(at: childIndex)
+                }
+                cell.onSave = {
+                    self.saveChildData(child: child)
                 }
                 return cell
             }
         }
     }
 }
+
+extension HomeScreen {
+    
+    private func addChildToPerson() {
+        let context = CoreDataManager.shared.context
+        let newChild = CoreDataChild(context: context)
+        newChild.name = "New Child"
+        newChild.age = "Age"
+        
+        tempChildren.append(newChild)
+        collectionView.reloadData()
+    }
+    
+    private func saveChildData(child: CoreDataChild) {
+
+        if child.name?.isEmpty == true || child.age?.isEmpty == true {
+            print("Недостаточно данных для сохранения")
+            return
+        }
+        
+        CoreDataManager.shared.saveContext()
+        collectionView.reloadData()
+    }
+    
+    private func deleteChild(at index: Int) {
+        tempChildren.remove(at: index)
+        collectionView.reloadData()
+    }
+    
+    private func deletePerson() {
+        guard let person = person else { return }
+        
+        CoreDataManager.shared.context.delete(person)
+        CoreDataManager.shared.saveContext()
+        collectionView.reloadData()
+    }
+}
+

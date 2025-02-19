@@ -12,6 +12,13 @@ class PersonCell: UICollectionViewCell {
         return stack
     }()
     
+    var person: CoreDataPerson? {
+        didSet {
+            nameTextField.text = person?.name
+            ageTextField.text = person?.age
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()

@@ -31,6 +31,7 @@ class HomeScreen: UIViewController {
         collectionView.register(cellWithClass: PersonCell.self)
         collectionView.register(cellWithClass: ChildCell.self)
         collectionView.register(cellWithClass: AddChildCell.self)
+        collectionView.register(cellWithClass: ClearButtonCell.self)
     }
 }
 
@@ -41,10 +42,12 @@ extension HomeScreen: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-                return 1
-            } else {
-                return person.children.count + (person.children.count < maxChildrenCount ? 1 : 0)
-            }
+            return 1
+        } else {
+            let childrenCount = person.children.count
+            let addButtonCount = childrenCount < maxChildrenCount ? 1 : 0
+            return childrenCount + addButtonCount + 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -52,26 +55,34 @@ extension HomeScreen: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             return cell
         } else {
-            if indexPath.item == 0 {
+            let childrenCount = person.children.count
+            let addButtonIndex = childrenCount < maxChildrenCount ? 0 : -1
+            let clearButtonIndex = childrenCount + (addButtonIndex == 0 ? 1 : 0)
+            
+            if indexPath.item == addButtonIndex {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddChildCell", for: indexPath) as! AddChildCell
                 cell.onAdd = {
                     let newChild = Child(name: "", age: "")
                     self.person.children.append(newChild)
-                    
-                    let newIndexPath = IndexPath(item: self.person.children.count, section: 1)
-                    self.collectionView.insertItems(at: [newIndexPath])
+                    self.collectionView.reloadData()
+                }
+                return cell
+            } else if indexPath.item == clearButtonIndex {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClearButtonCell", for: indexPath) as! ClearButtonCell
+                cell.onClearTapped = {
+                    self.person.children.removeAll()
+                    self.collectionView.reloadData()
                 }
                 return cell
             } else {
-                let childIndex = indexPath.item - 1
+                let childIndex = indexPath.item - (addButtonIndex == 0 ? 1 : 0)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
                 cell.onDelete = {
                     self.person.children.remove(at: childIndex)
-                    self.collectionView.deleteItems(at: [indexPath])
+                    self.collectionView.reloadData()
                 }
                 return cell
             }
         }
     }
-
 }

@@ -29,7 +29,7 @@ class PersonCell: UICollectionViewCell {
         return stack
     }()
     
-    var person: CoreDataPerson? {
+    var person: Person? {
         didSet {
             nameTextField.text = person?.name
             ageTextField.text = person?.age

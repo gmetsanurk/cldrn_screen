@@ -13,12 +13,13 @@
 		66D4189E2D63903A00098DCE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418982D63903A00098DCE /* Model.swift */; };
 		66D4189F2D63903A00098DCE /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418992D63903A00098DCE /* PersonCell.swift */; };
 		66D418A02D63903A00098DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66D418942D63903A00098DCE /* Assets.xcassets */; };
-		66D418A32D63971300098DCE /* AddChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418A22D63971300098DCE /* AddChildCell.swift */; };
 		66D418B52D6461CB00098DCE /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B42D6461CB00098DCE /* AppColors.swift */; };
 		66D418B72D64890600098DCE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418B62D64890600098DCE /* CustomTextField.swift */; };
 		66D418BC2D64D57000098DCE /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418BB2D64D55B00098DCE /* UIView+Extension.swift */; };
 		66D418BE2D64D70800098DCE /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418BD2D64D70800098DCE /* UICollectionView+Extension.swift */; };
 		66D418C02D65117900098DCE /* ClearButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418BF2D65116800098DCE /* ClearButtonCell.swift */; };
+		66D418C22D65CA6D00098DCE /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418C12D65CA6D00098DCE /* LocalDataBase.swift */; };
+		66D418C52D65CAA200098DCE /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66D418C32D65CAA200098DCE /* CoreDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +31,13 @@
 		66D418972D63903A00098DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66D418982D63903A00098DCE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		66D418992D63903A00098DCE /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
-		66D418A22D63971300098DCE /* AddChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChildCell.swift; sourceTree = "<group>"; };
 		66D418B42D6461CB00098DCE /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		66D418B62D64890600098DCE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		66D418BB2D64D55B00098DCE /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		66D418BD2D64D70800098DCE /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		66D418BF2D65116800098DCE /* ClearButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButtonCell.swift; sourceTree = "<group>"; };
+		66D418C12D65CA6D00098DCE /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
+		66D418C42D65CAA200098DCE /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,12 +75,13 @@
 				66D418942D63903A00098DCE /* Assets.xcassets */,
 				66D418962D63903A00098DCE /* HomeScreen .swift */,
 				66D418972D63903A00098DCE /* Info.plist */,
-				66D418982D63903A00098DCE /* Model.swift */,
 				66D418992D63903A00098DCE /* PersonCell.swift */,
 				66D418952D63903A00098DCE /* ChildCell.swift */,
-				66D418A22D63971300098DCE /* AddChildCell.swift */,
 				66D418BF2D65116800098DCE /* ClearButtonCell.swift */,
 				66D418B62D64890600098DCE /* CustomTextField.swift */,
+				66D418982D63903A00098DCE /* Model.swift */,
+				66D418C32D65CAA200098DCE /* CoreDataModel.xcdatamodeld */,
+				66D418C12D65CA6D00098DCE /* LocalDataBase.swift */,
 				66D418BA2D64D54400098DCE /* Extensions */,
 			);
 			path = cldrn_screen;
@@ -165,12 +168,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66D418A32D63971300098DCE /* AddChildCell.swift in Sources */,
 				66D418BE2D64D70800098DCE /* UICollectionView+Extension.swift in Sources */,
 				66D418B72D64890600098DCE /* CustomTextField.swift in Sources */,
+				66D418C52D65CAA200098DCE /* CoreDataModel.xcdatamodeld in Sources */,
 				66D4189B2D63903A00098DCE /* AppDelegate.swift in Sources */,
 				66D4189C2D63903A00098DCE /* ChildCell.swift in Sources */,
 				66D4189D2D63903A00098DCE /* HomeScreen .swift in Sources */,
+				66D418C22D65CA6D00098DCE /* LocalDataBase.swift in Sources */,
 				66D418B52D6461CB00098DCE /* AppColors.swift in Sources */,
 				66D418C02D65117900098DCE /* ClearButtonCell.swift in Sources */,
 				66D4189E2D63903A00098DCE /* Model.swift in Sources */,
@@ -377,6 +381,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		66D418C32D65CAA200098DCE /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				66D418C42D65CAA200098DCE /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 66D418C42D65CAA200098DCE /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 66D418372D637FA000098DCE /* Project object */;
 }

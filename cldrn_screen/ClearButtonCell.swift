@@ -8,10 +8,9 @@ class ClearButtonCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setTitle("Очистить", for: .normal)
         button.setTitleColor(.red, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        button.layer.borderColor = UIColor.red.cgColor
+        button.layer.borderColor = UIColor.systemRed.cgColor
         button.layer.borderWidth = 2
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 20
         return button
     }()
     
@@ -36,7 +35,8 @@ class ClearButtonCell: UICollectionViewCell {
             clearButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             clearButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             clearButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            clearButton.heightAnchor.constraint(equalToConstant: 50)
+            clearButton.widthAnchor.constraint(equalToConstant: 180),
+            clearButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
 }

@@ -13,7 +13,18 @@ class ChildCell: UICollectionViewCell {
     }()
     
     var onDelete: (() -> Void)?
+    var onSave: (() -> Void)?
+    
     var deleteButton = UIButton(type: .system)
+    var saveButton = UIButton(type: .system)
+    
+    var child: CoreDataChild? {
+        didSet {
+            nameTextField.text = child?.name
+            ageTextField.text = child?.age
+            //checkIfSaveButtonShouldBeVisible()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,8 +38,12 @@ class ChildCell: UICollectionViewCell {
     private func setupUI() {
         setupTextFieldsUI()
         setupDeleteButton()
+        setupSaveButton()
+        
         contentView.addSubview(stackView)
         contentView.addSubview(deleteButton)
+        contentView.addSubview(saveButton)
+        
         setupConstraints()
     }
     
@@ -47,18 +62,31 @@ class ChildCell: UICollectionViewCell {
         }, for: .primaryActionTriggered)
     }
     
+    private func setupSaveButton() {
+        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.addAction(UIAction { [weak self] _ in
+            self?.onSave?()
+            self?.isHidden = true
+        }, for: .primaryActionTriggered)
+    }
+    
     private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             deleteButton.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
             deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
             deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
+            
+            saveButton.centerYAnchor.constraint(equalTo: ageTextField.centerYAnchor),
+            saveButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
+            saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
             
             nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             nameTextField.heightAnchor.constraint(equalToConstant: 64),
@@ -66,6 +94,12 @@ class ChildCell: UICollectionViewCell {
             ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             ageTextField.heightAnchor.constraint(equalToConstant: 64),
         ])
+    }
+    
+    private func checkIfSaveButtonShouldBeVisible() {
+        let isNameValid = !(nameTextField.text?.isEmpty ?? true)
+        let isAgeValid = !(ageTextField.text?.isEmpty ?? true)
+        saveButton.isHidden = !(isNameValid && isAgeValid)
     }
 }
 

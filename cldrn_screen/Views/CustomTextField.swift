@@ -5,13 +5,13 @@ class CustomTextField: UITextField {
     func setupNameTextField(placeholder: String, isNumeric: Bool = false) {
         if isNumeric {
             self.attributedPlaceholder = NSAttributedString(
-                string: "Возраст",
+                string: NSLocalizedString("home_text_field.age", comment: "Home text field age string"),
                 attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
             )
             self.keyboardType = .numberPad
         } else {
             self.attributedPlaceholder = NSAttributedString(
-                string: "Имя",
+                string: NSLocalizedString("home_text_field.name", comment: "Home text field name string"),
                 attributes: [NSAttributedString.Key.foregroundColor: AppColors.personCellTextAligmentColor]
             )
         }
@@ -23,14 +23,14 @@ class CustomTextField: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
 }

@@ -1,0 +1,12 @@
+
+"person_cell.child_max" = "Дети (макс. 5)";
+"person_cell.add_child" = "+ Добавить ребенка";
+"person_cell.name_placeholder" = "Имя";
+"person_cell.age_placeholder" = "Возраст";
+"child_cell.name_placeholder" = " Имя";
+"child_cell.age_placeholder" = " Возраст";
+"child_cell.delete_button" = "Удалить";
+"child_cell.save_button" = "Сохранить";
+"clear_button_cell.clear_button" = "Очистить";
+"home_text_field.age" = "Возраст";
+"home_text_field.name" = "Имя";

@@ -10,7 +10,7 @@ class HomeScreen: UIViewController {
         viewModel = HomeViewModel(viewController: self)
         setupCollectionView()
         view.backgroundColor = UIColor.white
-        viewModel.loadData()
+        //viewModel.loadData()
     }
     
     private func setupCollectionView() {

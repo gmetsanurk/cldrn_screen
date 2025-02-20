@@ -1,0 +1,13 @@
+
+"person_cell.child_max" = "Childs (max. 5)";
+"person_cell.add_child" = "+ Add child";
+"person_cell.name_placeholder" = "Name";
+"person_cell.age_placeholder" = "Age";
+"child_cell.name_placeholder" = " Name";
+"child_cell.age_placeholder" = " Age";
+"child_cell.delete_button" = "Delete";
+"child_cell.save_button" = "Save";
+"clear_button_cell.clear_button" = "Clear";
+"home_text_field.age" = "Age";
+"home_text_field.name" = "Name";
+

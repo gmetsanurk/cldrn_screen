@@ -48,22 +48,22 @@ class ChildCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.setupNameTextField(placeholder: " Имя")
-        ageTextField.setupNameTextField(placeholder: " Возраст", isNumeric: true)
+        nameTextField.setupNameTextField(placeholder: NSLocalizedString("child_cell.name_placeholder", comment: "Name placeholder"))
+        ageTextField.setupNameTextField(placeholder: NSLocalizedString("child_cell.age_placeholder", comment: "Age placeholder"), isNumeric: true)
         
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
     
     private func setupDeleteButton() {
-        deleteButton.setTitle("Удалить", for: .normal)
+        deleteButton.setTitle(NSLocalizedString("child_cell.delete_button", comment: "ChildCell delete button"), for: .normal)
         deleteButton.addAction(UIAction { [weak self] _ in
             self?.onDelete?()
         }, for: .primaryActionTriggered)
     }
     
     private func setupSaveButton() {
-        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.setTitle(NSLocalizedString("child_cell.save_button", comment: "ChildCell dave button"), for: .normal)
         saveButton.addAction(UIAction { [weak self] _ in
             self?.onSave?()
             //self?.isHidden = true
@@ -76,23 +76,23 @@ class ChildCell: UICollectionViewCell {
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AppGeometry.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             deleteButton.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
-            deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
+            deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: AppGeometry.childCellButtonsLeadingAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: AppGeometry.childCellButtonsTrailingAnchor),
             
             saveButton.centerYAnchor.constraint(equalTo: ageTextField.centerYAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-            saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
+            saveButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: AppGeometry.childCellButtonsLeadingAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: AppGeometry.childCellButtonsTrailingAnchor),
             
-            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            nameTextField.heightAnchor.constraint(equalToConstant: 64),
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.childCellTextFieldsWidth),
+            nameTextField.heightAnchor.constraint(equalToConstant: AppGeometry.childCellTextFieldsHeight),
             
-            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            ageTextField.heightAnchor.constraint(equalToConstant: 64),
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.childCellTextFieldsWidth),
+            ageTextField.heightAnchor.constraint(equalToConstant: AppGeometry.childCellTextFieldsHeight),
         ])
     }
     

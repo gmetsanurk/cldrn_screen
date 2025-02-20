@@ -21,6 +21,7 @@
 		66D418C22D65CA6D00098DCE /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66D418C12D65CA6D00098DCE /* LocalDataBase.swift */; };
 		66D418C52D65CAA200098DCE /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 66D418C32D65CAA200098DCE /* CoreDataModel.xcdatamodeld */; };
 		66E2DF382D6747BA001C80A0 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E2DF372D6747B3001C80A0 /* HomeViewModel.swift */; };
+		66E2DF4D2D676E82001C80A0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66E2DF4B2D676E82001C80A0 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,8 @@
 		66D418C12D65CA6D00098DCE /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		66D418C42D65CAA200098DCE /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		66E2DF372D6747B3001C80A0 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		66E2DF4C2D676E82001C80A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		66E2DF4E2D676EB4001C80A0 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,11 +77,12 @@
 			children = (
 				66D418B42D6461CB00098DCE /* AppColors.swift */,
 				66D418932D63903A00098DCE /* AppDelegate.swift */,
-				66D418942D63903A00098DCE /* Assets.xcassets */,
 				66D418962D63903A00098DCE /* HomeScreen .swift */,
 				66E2DF372D6747B3001C80A0 /* HomeViewModel.swift */,
-				66D418972D63903A00098DCE /* Info.plist */,
 				66D418C12D65CA6D00098DCE /* LocalDataBase.swift */,
+				66D418942D63903A00098DCE /* Assets.xcassets */,
+				66E2DF4B2D676E82001C80A0 /* Localizable.strings */,
+				66D418972D63903A00098DCE /* Info.plist */,
 				66E2DF392D67514F001C80A0 /* Views */,
 				66E2DF3A2D67516B001C80A0 /* Model */,
 				66D418BA2D64D54400098DCE /* Extensions */,
@@ -158,6 +162,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 66D418362D637FA000098DCE;
 			minimizedProjectReferenceProxies = 1;
@@ -177,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66D418A02D63903A00098DCE /* Assets.xcassets in Resources */,
+				66E2DF4D2D676E82001C80A0 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +210,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		66E2DF4B2D676E82001C80A0 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66E2DF4C2D676E82001C80A0 /* en */,
+				66E2DF4E2D676EB4001C80A0 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		66D418532D637FA100098DCE /* Debug */ = {
@@ -319,6 +337,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -375,6 +394,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

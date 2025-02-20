@@ -23,14 +23,14 @@ class CustomTextField: UITextField {
     }
     
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return bounds.insetBy(dx: AppGeometry.customTextFeildsBoundsInsetDx, dy: AppGeometry.customTextFeildsBoundsInsetDy)
     }
 }

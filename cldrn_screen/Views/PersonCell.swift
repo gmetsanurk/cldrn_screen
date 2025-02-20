@@ -82,16 +82,16 @@ class PersonCell: UICollectionViewCell {
     private func setupConstraints() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AppGeometry.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 330),
-            nameTextField.heightAnchor.constraint(equalToConstant: 64),
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.personCellTextFieldsWidth),
+            nameTextField.heightAnchor.constraint(equalToConstant: AppGeometry.personCellTextFieldsHeight),
             
-            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 330),
-            ageTextField.heightAnchor.constraint(equalToConstant: 64),
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.personCellTextFieldsWidth),
+            ageTextField.heightAnchor.constraint(equalToConstant: AppGeometry.personCellTextFieldsHeight),
             
             addButton.widthAnchor.constraint(equalToConstant: 180),
             addButton.heightAnchor.constraint(equalToConstant: 44)

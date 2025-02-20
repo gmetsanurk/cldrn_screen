@@ -11,5 +11,18 @@ struct AppColors {
 
 struct AppGeometry {
     static let cornerRadius = 5.0
+    static let customTextFeildsBoundsInsetDx: CGFloat = 10
+    static let customTextFeildsBoundsInsetDy: CGFloat = 0
+    static let topAnchor: CGFloat = 10
+    static let bottomAnchor: CGFloat = -10
+    static let personCellTextFieldsWidth: CGFloat = 330
+    static let personCellTextFieldsHeight: CGFloat = 64
+    static let childCellButtonsLeadingAnchor: CGFloat = 10
+    static let childCellButtonsTrailingAnchor: CGFloat = -70
+    static let childCellTextFieldsWidth: CGFloat = 200
+    static let childCellTextFieldsHeight: CGFloat = 64
+    static let clearButtonLeadingAndTrailingAnchor: CGFloat = -16
+    static let clearButtonWidth: CGFloat = 180
+    static let clearButtonHeight: CGFloat = 44
 }
 

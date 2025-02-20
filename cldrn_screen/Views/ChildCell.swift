@@ -76,23 +76,23 @@ class ChildCell: UICollectionViewCell {
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AppGeometry.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             deleteButton.centerYAnchor.constraint(equalTo: nameTextField.centerYAnchor),
-            deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
+            deleteButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: AppGeometry.childCellButtonsLeadingAnchor),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: AppGeometry.childCellButtonsTrailingAnchor),
             
             saveButton.centerYAnchor.constraint(equalTo: ageTextField.centerYAnchor),
-            saveButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 10),
-            saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -70),
+            saveButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: AppGeometry.childCellButtonsLeadingAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: AppGeometry.childCellButtonsTrailingAnchor),
             
-            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            nameTextField.heightAnchor.constraint(equalToConstant: 64),
+            nameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.childCellTextFieldsWidth),
+            nameTextField.heightAnchor.constraint(equalToConstant: AppGeometry.childCellTextFieldsHeight),
             
-            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            ageTextField.heightAnchor.constraint(equalToConstant: 64),
+            ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: AppGeometry.childCellTextFieldsWidth),
+            ageTextField.heightAnchor.constraint(equalToConstant: AppGeometry.childCellTextFieldsHeight),
         ])
     }
     

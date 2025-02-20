@@ -31,12 +31,12 @@ class ClearButtonCell: UICollectionViewCell {
         }, for: .primaryActionTriggered)
         
         NSLayoutConstraint.activate([
-            clearButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            clearButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            clearButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            clearButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            clearButton.widthAnchor.constraint(equalToConstant: 180),
-            clearButton.heightAnchor.constraint(equalToConstant: 44)
+            clearButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: AppGeometry.topAnchor),
+            clearButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: AppGeometry.clearButtonLeadingAndTrailingAnchor),
+            clearButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: AppGeometry.clearButtonLeadingAndTrailingAnchor),
+            clearButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: AppGeometry.bottomAnchor),
+            clearButton.widthAnchor.constraint(equalToConstant: AppGeometry.clearButtonWidth),
+            clearButton.heightAnchor.constraint(equalToConstant: AppGeometry.clearButtonHeight)
         ])
     }
 }

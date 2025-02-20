@@ -4,10 +4,27 @@ class PersonCell: UICollectionViewCell {
     let nameTextField = CustomTextField()
     let ageTextField = CustomTextField()
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Дети (макс. 5)"
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.textColor = AppColors.childCellTextColor
+        return label
+    }()
+    
+    private let addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("+ Добавить ребенка", for: .normal)
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.borderWidth = 2
+        button.layer.cornerRadius = 20
+        return button
+    }()
+    
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 10
+        stack.spacing = 20
         stack.alignment = .leading
         return stack
     }()
@@ -18,6 +35,9 @@ class PersonCell: UICollectionViewCell {
             ageTextField.text = person?.age
         }
     }
+    
+    var onSave: (() -> Void)?
+    var onAddChild: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +50,12 @@ class PersonCell: UICollectionViewCell {
     
     private func setupUI() {
         setupTextFieldsUI()
+        setupChildUI()
+        
+        addButton.addAction(UIAction { [weak self] _ in
+            self?.onAddChildTapped()
+        }, for: .primaryActionTriggered)
+        
         contentView.addSubview(stackView)
         setupConstraints()
     }
@@ -39,6 +65,18 @@ class PersonCell: UICollectionViewCell {
         ageTextField.setupNameTextField(placeholder: "Возраст", isNumeric: true)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
+    }
+    
+    private func setupChildUI() {
+        let childStack = UIStackView(arrangedSubviews: [titleLabel, addButton])
+        childStack.axis = .horizontal
+        childStack.spacing = 8
+        childStack.alignment = .center
+        
+        titleLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        addButton.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        
+        stackView.addArrangedSubview(childStack)
     }
     
     private func setupConstraints() {
@@ -53,8 +91,29 @@ class PersonCell: UICollectionViewCell {
             nameTextField.heightAnchor.constraint(equalToConstant: 64),
             
             ageTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 330),
-            ageTextField.heightAnchor.constraint(equalToConstant: 64)
+            ageTextField.heightAnchor.constraint(equalToConstant: 64),
+            
+            addButton.widthAnchor.constraint(equalToConstant: 180),
+            addButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
+    
+    func onAddChildTapped() {
+        print("Нажата кнопка 'Добавить ребенка' внутри PersonCell")
+        savePerson()
+        onAddChild?()
+    }
+    
+    func savePerson() {
+        guard let context = person?.managedObjectContext else { return }
+        person?.name = nameTextField.text
+        person?.age = ageTextField.text
+        
+        do {
+            try context.save()
+            print("Персона сохранена в Core Data.")
+        } catch {
+            print("Ошибка при сохранении персоны: \(error)")
+        }
+    }
 }
-

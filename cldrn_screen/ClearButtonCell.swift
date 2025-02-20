@@ -5,7 +5,6 @@ class ClearButtonCell: UICollectionViewCell {
     var onClearTapped: (() -> Void)?
     
     private let clearButton: UIButton = {
-        //button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         let button = UIButton(type: .system)
         button.setTitle("Очистить", for: .normal)
         button.setTitleColor(.red, for: .normal)

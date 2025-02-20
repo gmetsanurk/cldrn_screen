@@ -22,7 +22,7 @@ class ChildCell: UICollectionViewCell {
         didSet {
             nameTextField.text = child?.name
             ageTextField.text = child?.age
-            checkIfSaveButtonShouldBeVisible()
+            //checkIfSaveButtonShouldBeVisible()
         }
     }
     
@@ -66,8 +66,8 @@ class ChildCell: UICollectionViewCell {
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.addAction(UIAction { [weak self] _ in
             self?.onSave?()
+            self?.isHidden = true
         }, for: .primaryActionTriggered)
-        saveButton.isHidden = true
     }
     
     private func setupConstraints() {

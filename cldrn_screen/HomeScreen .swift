@@ -11,6 +11,13 @@ class HomeScreen: UIViewController {
         setupCollectionView()
         view.backgroundColor = UIColor.white
         viewModel.loadData()
+        
+        viewModel.onShowAlert = { [weak self] title, message, confirmTitle, cancelTitle in
+            self?.showAlert(title: title, message: message, confirmTitle: confirmTitle, cancelTitle: cancelTitle)
+        }
+        viewModel.onShowStopAlert = { [weak self] title, message, cancelTitle in
+            self?.showStopAlert(title: title, message: message, cancelTitle: cancelTitle)
+        }
     }
     
     private func setupCollectionView() {
@@ -66,40 +73,25 @@ extension HomeScreen {
         return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell
     }
     
-    func presentAlertControllerForClearAction() {
-        let controllerTitle = NSLocalizedString("home_screen.alert_title", comment: "Home screean alert controller title")
-        let controllerMessage = NSLocalizedString("home_screen.alert_message", comment: "Home screen alert controller message")
-        let deleteButtonTitle = NSLocalizedString("home_screen.alert_clear_button", comment: "Home screen alert controller clear button")
-        let cancelButtonTitle = NSLocalizedString("home_screen.alert_cancel_button", comment: "Home screen alert controller cancel button")
-        
-        let alertController = UIAlertController(title: controllerTitle, message: controllerMessage, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: deleteButtonTitle , style: .destructive) { [weak self] _ in
-            
-            Task {
-                do {
-                    self?.viewModel.deletePerson()
-                    self?.collectionView.reloadData()
-                    print("Task deleted successfully.")
-                }
-            }
+    private func showAlert(title: String, message: String, confirmTitle: String, cancelTitle: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: confirmTitle, style: .destructive) { [weak self] _ in
+            self?.viewModel.deletePerson()
         }
-        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel)
-        
-        alertController.addAction(deleteAction)
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel)
+
+        alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true)
     }
     
-    func presentStopAlertController() {
-        let controllerTitle = NSLocalizedString("home_screen.stop_alert_title", comment: "Home screen stop alert controller title")
-        let controllerMessage = NSLocalizedString("home_screen.stop_alert_message", comment: "Home screen stop alert controller message")
-        let oKMessage = NSLocalizedString("home_screen.stop_alert_ok", comment: "Home screen stop alert controller message OK")
-        
-        let alertController = UIAlertController(title: controllerTitle, message: controllerMessage, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: oKMessage, style: .cancel)
-        
+    private func showStopAlert(title: String, message: String, cancelTitle: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel)
+
         alertController.addAction(cancelAction)
+        
         present(alertController, animated: true)
     }
 }

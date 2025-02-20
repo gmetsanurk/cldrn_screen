@@ -4,6 +4,8 @@ import CoreData
 class HomeViewModel {
     
     weak var viewController: HomeScreen?
+    var onShowAlert: ((String, String, String, String) -> Void)?
+    var onShowStopAlert: ((String, String, String) -> Void)?
     
     private let maxChildrenCount = 5
     private var person: Person?
@@ -73,7 +75,11 @@ class HomeViewModel {
         }
         
         if tempChildren.count >= maxChildrenCount {
-            viewController.presentStopAlertController()
+            onShowStopAlert?(
+                NSLocalizedString("home_screen.stop_alert_title", comment: "Title"),
+                NSLocalizedString("home_screen.stop_alert_message", comment: "Message"),
+                NSLocalizedString("home_screen.stop_alert_ok", comment: "OK")
+            )
             print("Max children")
             return
         }
@@ -95,7 +101,12 @@ class HomeViewModel {
     }
     
     func handleAlertController() {
-        viewController?.presentAlertControllerForClearAction()
+        onShowAlert?(
+            NSLocalizedString("home_screen.alert_title", comment: "Title"),
+            NSLocalizedString("home_screen.alert_message", comment: "Message"),
+            NSLocalizedString("home_screen.alert_clear_button", comment: "Delete"),
+            NSLocalizedString("home_screen.alert_cancel_button", comment: "Cancel")
+        )
     }
     
     func deletePerson() {

@@ -45,8 +45,10 @@ extension HomeScreen: UICollectionViewDataSource {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             cell.person = person
-            cell.onSave = { [weak self] in
-                self?.savePerson()
+            cell.onSave = { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                self.updatePersonData(from: cell)
+                self.savePerson()
             }
             cell.onAddChild = { [weak self] in
                 self?.addChildToPerson()
@@ -61,8 +63,10 @@ extension HomeScreen: UICollectionViewDataSource {
             cell.onDelete = { [weak self] in
                 self?.deleteChild(at: childIndex)
             }
-            cell.onSave = { [weak self] in
-                self?.saveChildData(child: child)
+            cell.onSave = { [weak self, weak cell] in
+                guard let self = self, let cell = cell else { return }
+                self.updateChildData(from: cell, at: childIndex)
+                self.saveChildData(child: child)
             }
             return cell
         } else {
@@ -73,31 +77,67 @@ extension HomeScreen: UICollectionViewDataSource {
             return cell
         }
     }
+}
 
+extension HomeScreen: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let personCell = cell as? PersonCell {
+            personCell.nameTextField.text = person?.name
+            personCell.ageTextField.text = person?.age
+        } else if let childCell = cell as? ChildCell {
+            let childIndex = indexPath.item - 1
+            let child = tempChildren[childIndex]
+            childCell.nameTextField.text = child.name
+            childCell.ageTextField.text = child.age
+        }
+    }
 }
 
 //MARK: Transfer it to HomePresenter
 extension HomeScreen {
     
-    private func loadDataFromCoreData() {
+    private func updatePersonData(from cell: PersonCell) {
+        if person == nil {
+            let context = CoreDataManager.shared.context
+            person = CoreDataPerson(context: context)
+        }
         
+        person?.name = cell.nameTextField.text ?? ""
+        person?.age = cell.ageTextField.text ?? ""
+    }
+
+    private func updateChildData(from cell: ChildCell, at index: Int) {
+        tempChildren[index].name = cell.nameTextField.text ?? "Без имени"
+        tempChildren[index].age = cell.ageTextField.text ?? "0"
+    }
+    
+    private func loadDataFromCoreData() {
         let context = CoreDataManager.shared.context
         let personRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
         
         do {
             let fetchedPersons = try context.fetch(personRequest)
+            
             if let firstPerson = fetchedPersons.first {
                 self.person = firstPerson
                 self.tempChildren = firstPerson.children.allObjects as? [CoreDataChild] ?? []
-                collectionView.reloadData()
+            } else {
+                self.person = nil
+                self.tempChildren = []
             }
+            
+            collectionView.reloadData()
         } catch {
-            print("Error loading person data: \(error)")
+            print("Ошибка загрузки данных: \(error)")
         }
     }
 
+
     private func addChildToPerson() {
-        //guard let person = person else { return }
+        if let personCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell {
+            updatePersonData(from: personCell)
+            savePerson()
+        }
 
         let context = CoreDataManager.shared.context
         let newChild = CoreDataChild(context: context)
@@ -106,15 +146,17 @@ extension HomeScreen {
         newChild.parent = person
 
         tempChildren.append(newChild)
+        
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
 
+
     
     private func saveChildData(child: CoreDataChild) {
-            CoreDataManager.shared.saveContext()
-            collectionView.reloadData()
-        }
+        CoreDataManager.shared.saveContext()
+        collectionView.reloadData()
+    }
     
     private func savePerson() {
         guard let person = person else { return }

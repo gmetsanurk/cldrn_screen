@@ -18,7 +18,7 @@ class ChildCell: UICollectionViewCell {
     var deleteButton = UIButton(type: .system)
     var saveButton = UIButton(type: .system)
     
-    var child: CoreDataChild? {
+    var child: Child? {
         didSet {
             nameTextField.text = child?.name
             ageTextField.text = child?.age

@@ -10,7 +10,14 @@ class HomeScreen: UIViewController {
         viewModel = HomeViewModel(viewController: self)
         setupCollectionView()
         view.backgroundColor = UIColor.white
-        //viewModel.loadData()
+        viewModel.loadData()
+        
+        viewModel.onShowAlert = { [weak self] title, message, confirmTitle, cancelTitle in
+            self?.showAlert(title: title, message: message, confirmTitle: confirmTitle, cancelTitle: cancelTitle)
+        }
+        viewModel.onShowStopAlert = { [weak self] title, message, cancelTitle in
+            self?.showStopAlert(title: title, message: message, cancelTitle: cancelTitle)
+        }
     }
     
     private func setupCollectionView() {
@@ -64,5 +71,27 @@ extension HomeScreen {
     
     func returnPersonCell() -> UICollectionViewCell? {
         return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell
+    }
+    
+    private func showAlert(title: String, message: String, confirmTitle: String, cancelTitle: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: confirmTitle, style: .destructive) { [weak self] _ in
+            self?.viewModel.deletePerson()
+        }
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel)
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
+    
+    private func showStopAlert(title: String, message: String, cancelTitle: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel)
+
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
 }

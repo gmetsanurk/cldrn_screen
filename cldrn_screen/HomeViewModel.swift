@@ -4,9 +4,12 @@ import CoreData
 class HomeViewModel {
     
     weak var viewController: HomeScreen?
+    var onShowAlert: ((String, String, String, String) -> Void)?
+    var onShowStopAlert: ((String, String, String) -> Void)?
     
     private let maxChildrenCount = 5
-    private var person: CoreDataPerson?
+    private var person: Person?
+    private var coreDataPerson: CoreDataPerson?
     private var tempChildren: [CoreDataChild] = []
     
     init(viewController: HomeScreen) {
@@ -17,10 +20,20 @@ class HomeViewModel {
         let context = CoreDataManager.shared.context
         let fetchRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
         
+        let fetchChildrenRequest: NSFetchRequest<CoreDataChild> = CoreDataChild.fetchRequest() as! NSFetchRequest<CoreDataChild>
+        
         do {
             let people = try context.fetch(fetchRequest)
-            self.person = people.first
-            self.tempChildren = (person?.children as? Set<CoreDataChild>)?.sorted { $0.name ?? "" < $1.name ?? "" } ?? []
+            self.coreDataPerson = people.first
+            tempChildren = try context.fetch(fetchChildrenRequest)
+            
+            let childrenForParent = Set(tempChildren.filter {
+                $0.parentId == coreDataPerson?.personId // This does not affect anything(
+            }.map {
+                Child(model: $0)
+            })
+            
+            self.person = .init(id: coreDataPerson?.personId, name: coreDataPerson?.name, age: coreDataPerson?.age, children: childrenForParent)
             
             DispatchQueue.main.async {
                 self.viewController?.reloadCollectionView()
@@ -33,11 +46,12 @@ class HomeViewModel {
     }
     
     func updatePersonData(from cell: PersonCell) {
-        if person == nil {
-            person = CoreDataPerson(context: CoreDataManager.shared.context)
+        if coreDataPerson == nil {
+            coreDataPerson = CoreDataPerson(context: CoreDataManager.shared.context)
         }
-        person?.name = cell.nameTextField.text ?? ""
-        person?.age = cell.ageTextField.text ?? ""
+        coreDataPerson!.name = cell.nameTextField.text ?? ""
+        coreDataPerson!.age = cell.ageTextField.text ?? ""
+        person = .init(model: coreDataPerson!, children: .init())
         saveData()
     }
     
@@ -61,6 +75,11 @@ class HomeViewModel {
         }
         
         if tempChildren.count >= maxChildrenCount {
+            onShowStopAlert?(
+                NSLocalizedString("home_screen.stop_alert_title", comment: "Title"),
+                NSLocalizedString("home_screen.stop_alert_message", comment: "Message"),
+                NSLocalizedString("home_screen.stop_alert_ok", comment: "OK")
+            )
             print("Max children")
             return
         }
@@ -68,17 +87,26 @@ class HomeViewModel {
         let newChild = CoreDataChild(context: context)
         newChild.name = "new name"
         newChild.age = "0"
-        newChild.parent = person
+        newChild.parentId = coreDataPerson?.personId
         
         tempChildren.append(newChild)
         saveData()
     }
-
+    
     func deleteChild(at index: Int) {
         let childToDelete = tempChildren[index]
         CoreDataManager.shared.context.delete(childToDelete)
         tempChildren.remove(at: index)
         saveData()
+    }
+    
+    func handleAlertController() {
+        onShowAlert?(
+            NSLocalizedString("home_screen.alert_title", comment: "Title"),
+            NSLocalizedString("home_screen.alert_message", comment: "Message"),
+            NSLocalizedString("home_screen.alert_clear_button", comment: "Delete"),
+            NSLocalizedString("home_screen.alert_cancel_button", comment: "Cancel")
+        )
     }
     
     func deletePerson() {
@@ -130,7 +158,7 @@ class HomeViewModel {
             let child = tempChildren[childIndex]
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
-            cell.child = child
+            cell.child = .init(model: child)
             cell.onDelete = { [weak self] in
                 self?.deleteChild(at: childIndex)
             }
@@ -142,7 +170,7 @@ class HomeViewModel {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClearButtonCell", for: indexPath) as! ClearButtonCell
             cell.onClearTapped = { [weak self] in
-                self?.deletePerson()
+                self?.handleAlertController()
             }
             return cell
         }

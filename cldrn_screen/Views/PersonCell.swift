@@ -102,4 +102,5 @@ class PersonCell: UICollectionViewCell {
         print("AddChild pressed inside PersonCell")
         onAddChild?()
     }
+    
 }

@@ -65,4 +65,29 @@ extension HomeScreen {
     func returnPersonCell() -> UICollectionViewCell? {
         return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell
     }
+    
+    func presentAlertController() {
+        let controllerTitle = NSLocalizedString("home_screen.alert_title", comment: "Home screean alert controller title")
+        let controllerMessage = NSLocalizedString("home_screen.alert_message", comment: "Home screen alert controller message")
+        let deleteButtonTitle = NSLocalizedString("home_screen.alert_clear_button", comment: "Home screen alert controller clear button")
+        let cancelButtonTitle = NSLocalizedString("home_screen.alert_cancel_button", comment: "Home screen alert controller cancel button")
+        
+        let alertController = UIAlertController(title: controllerTitle, message: controllerMessage, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: deleteButtonTitle , style: .destructive) { [weak self] _ in
+            
+            Task {
+                do {
+                    self?.viewModel.deletePerson()
+                    self?.collectionView.reloadData()
+                    print("Task deleted successfully.")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel)
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
+    }
 }

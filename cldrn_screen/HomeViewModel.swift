@@ -93,6 +93,10 @@ class HomeViewModel {
         saveData()
     }
     
+    func handleAlertController() {
+        viewController?.presentAlertController()
+    }
+    
     func deletePerson() {
         deleteAllData()
         saveData()
@@ -154,7 +158,7 @@ class HomeViewModel {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClearButtonCell", for: indexPath) as! ClearButtonCell
             cell.onClearTapped = { [weak self] in
-                self?.deletePerson()
+                self?.handleAlertController()
             }
             return cell
         }

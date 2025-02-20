@@ -1,4 +1,8 @@
 
+"home_screen.alert_title" = "Clear task";
+"home_screen.alert_message" = "Do you want clear all?";
+"home_screen.alert_clear_button" = "Confirm and clear";
+"home_screen.alert_cancel_button" = "Cancel";
 "person_cell.child_max" = "Childs (max. 5)";
 "person_cell.add_child" = "+ Add child";
 "person_cell.name_placeholder" = "Name";

@@ -66,7 +66,7 @@ extension HomeScreen {
         return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell
     }
     
-    func presentAlertController() {
+    func presentAlertControllerForClearAction() {
         let controllerTitle = NSLocalizedString("home_screen.alert_title", comment: "Home screean alert controller title")
         let controllerMessage = NSLocalizedString("home_screen.alert_message", comment: "Home screen alert controller message")
         let deleteButtonTitle = NSLocalizedString("home_screen.alert_clear_button", comment: "Home screen alert controller clear button")
@@ -88,6 +88,18 @@ extension HomeScreen {
         alertController.addAction(deleteAction)
         alertController.addAction(cancelAction)
         
+        present(alertController, animated: true)
+    }
+    
+    func presentStopAlertController() {
+        let controllerTitle = NSLocalizedString("home_screen.stop_alert_title", comment: "Home screen stop alert controller title")
+        let controllerMessage = NSLocalizedString("home_screen.stop_alert_message", comment: "Home screen stop alert controller message")
+        let oKMessage = NSLocalizedString("home_screen.stop_alert_ok", comment: "Home screen stop alert controller message OK")
+        
+        let alertController = UIAlertController(title: controllerTitle, message: controllerMessage, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: oKMessage, style: .cancel)
+        
+        alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
 }

@@ -3,6 +3,9 @@
 "home_screen.alert_message" = "Хотите очистить всё?";
 "home_screen.alert_clear_button" = "Подтвердить и удалить";
 "home_screen.alert_cancel_button" = "Отмена";
+"home_screen.stop_alert_title" = "Внимание!";
+"home_screen.stop_alert_message" = "Достигнут максимум 5";
+"home_screen.stop_alert_ok" = "ОК";
 "person_cell.child_max" = "Дети (макс. 5)";
 "person_cell.add_child" = "+ Добавить ребенка";
 "person_cell.name_placeholder" = "Имя";

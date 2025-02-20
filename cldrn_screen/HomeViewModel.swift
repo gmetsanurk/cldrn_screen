@@ -73,6 +73,7 @@ class HomeViewModel {
         }
         
         if tempChildren.count >= maxChildrenCount {
+            viewController.presentStopAlertController()
             print("Max children")
             return
         }
@@ -94,7 +95,7 @@ class HomeViewModel {
     }
     
     func handleAlertController() {
-        viewController?.presentAlertController()
+        viewController?.presentAlertControllerForClearAction()
     }
     
     func deletePerson() {

@@ -66,7 +66,7 @@ class ChildCell: UICollectionViewCell {
         saveButton.setTitle("Сохранить", for: .normal)
         saveButton.addAction(UIAction { [weak self] _ in
             self?.onSave?()
-            self?.isHidden = true
+            //self?.isHidden = true
         }, for: .primaryActionTriggered)
     }
     

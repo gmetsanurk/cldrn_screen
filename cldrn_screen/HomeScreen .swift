@@ -1,156 +1,68 @@
 import UIKit
-import CoreData
 
 class HomeScreen: UIViewController {
     
+    var viewModel: HomeViewModel!
     private var collectionView: UICollectionView!
-    private var person: CoreDataPerson?
-    private var tempChildren: [CoreDataChild] = []
-    
-    private let maxChildrenCount = 5
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = HomeViewModel(viewController: self)
         setupCollectionView()
         view.backgroundColor = UIColor.white
-        loadDataFromCoreData()
+        viewModel.loadData()
     }
     
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16)
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
-        registerCellsToTheCollectionView()
+        collectionView.delegate = self
+        registerCells()
+        
         view.addSubview(collectionView)
-        collectionView.fillToSuperview()
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
-    private func registerCellsToTheCollectionView() {
+    private func registerCells() {
         collectionView.register(cellWithClass: PersonCell.self)
         collectionView.register(cellWithClass: ChildCell.self)
         collectionView.register(cellWithClass: ClearButtonCell.self)
     }
+    
+    func reloadCollectionView() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
 }
 
 extension HomeScreen: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2 + tempChildren.count
+        return viewModel.numberOfItems()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
-            cell.person = person
-            cell.onSave = { [weak self] in
-                self?.savePerson()
-            }
-            cell.onAddChild = { [weak self] in
-                self?.addChildToPerson()
-            }
-            return cell
-        } else if indexPath.item <= tempChildren.count {
-            let childIndex = indexPath.item - 1
-            let child = tempChildren[childIndex]
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
-            cell.child = child
-            cell.onDelete = { [weak self] in
-                self?.deleteChild(at: childIndex)
-            }
-            cell.onSave = { [weak self] in
-                self?.saveChildData(child: child)
-            }
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ClearButtonCell", for: indexPath) as! ClearButtonCell
-            cell.onClearTapped = { [weak self] in
-                self?.deletePerson()
-            }
-            return cell
-        }
+        return viewModel.configureCell(at: indexPath, for: collectionView)
     }
-
+    
 }
 
-//MARK: Transfer it to HomePresenter
+extension HomeScreen: UICollectionViewDelegate {}
+
 extension HomeScreen {
     
-    private func loadDataFromCoreData() {
-        
-        let context = CoreDataManager.shared.context
-        let personRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
-        
-        do {
-            let fetchedPersons = try context.fetch(personRequest)
-            if let firstPerson = fetchedPersons.first {
-                self.person = firstPerson
-                self.tempChildren = firstPerson.children.allObjects as? [CoreDataChild] ?? []
-                collectionView.reloadData()
-            }
-        } catch {
-            print("Error loading person data: \(error)")
-        }
-    }
-
-    private func addChildToPerson() {
-        //guard let person = person else { return }
-
-        let context = CoreDataManager.shared.context
-        let newChild = CoreDataChild(context: context)
-        newChild.name = "Новое имя"
-        newChild.age = "0"
-        newChild.parent = person
-
-        tempChildren.append(newChild)
-        CoreDataManager.shared.saveContext()
-        collectionView.reloadData()
-    }
-
-    
-    private func saveChildData(child: CoreDataChild) {
-            CoreDataManager.shared.saveContext()
-            collectionView.reloadData()
-        }
-    
-    private func savePerson() {
-        guard let person = person else { return }
-        
-        person.name = person.name ?? "SampleName"
-        person.age = person.age ?? "30"
-        
-        CoreDataManager.shared.saveContext()
-        collectionView.reloadData()
-    }
-    
-    
-    private func deleteChild(at index: Int) {
-        let context = CoreDataManager.shared.context
-        let childToDelete = tempChildren[index]
-        
-        context.delete(childToDelete)
-        tempChildren.remove(at: index)
-        
-        CoreDataManager.shared.saveContext()
-        collectionView.reloadData()
-    }
-    
-    private func deletePerson() {
-        guard let person = person else { return }
-        
-        let context = CoreDataManager.shared.context
-        
-        for child in tempChildren {
-            context.delete(child)
-        }
-        
-        context.delete(person)
-        
-        CoreDataManager.shared.saveContext()
-        collectionView.reloadData()
+    func returnPersonCell() -> UICollectionViewCell? {
+        return collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell
     }
 }
-

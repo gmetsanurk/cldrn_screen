@@ -100,20 +100,6 @@ class PersonCell: UICollectionViewCell {
     
     func onAddChildTapped() {
         print("Нажата кнопка 'Добавить ребенка' внутри PersonCell")
-        savePerson()
         onAddChild?()
-    }
-    
-    func savePerson() {
-        guard let context = person?.managedObjectContext else { return }
-        person?.name = nameTextField.text
-        person?.age = ageTextField.text
-        
-        do {
-            try context.save()
-            print("Персона сохранена в Core Data.")
-        } catch {
-            print("Ошибка при сохранении персоны: \(error)")
-        }
     }
 }

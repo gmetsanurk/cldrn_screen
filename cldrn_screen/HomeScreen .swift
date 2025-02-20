@@ -40,7 +40,7 @@ extension HomeScreen: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2 + tempChildren.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
@@ -57,7 +57,7 @@ extension HomeScreen: UICollectionViewDataSource {
         } else if indexPath.item <= tempChildren.count {
             let childIndex = indexPath.item - 1
             let child = tempChildren[childIndex]
-
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChildCell", for: indexPath) as! ChildCell
             cell.child = child
             cell.onDelete = { [weak self] in
@@ -93,11 +93,9 @@ extension HomeScreen: UICollectionViewDelegate {
     }
 }
 
-
-
 //MARK: Transfer it to HomePresenter
 extension HomeScreen {
-
+    
     private func loadDataFromCoreData() {
         let context = CoreDataManager.shared.context
         let fetchRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
@@ -120,7 +118,7 @@ extension HomeScreen {
             print("ошибка загрузки данных: \(error.localizedDescription)")
         }
     }
-
+    
     private func updatePersonData(from cell: PersonCell) {
         if person == nil {
             let context = CoreDataManager.shared.context
@@ -130,7 +128,7 @@ extension HomeScreen {
         person?.name = cell.nameTextField.text ?? ""
         person?.age = cell.ageTextField.text ?? ""
     }
-
+    
     private func updateChildData(from cell: ChildCell, at index: Int) {
         tempChildren[index].name = cell.nameTextField.text ?? "Без имени"
         tempChildren[index].age = cell.ageTextField.text ?? "0"
@@ -138,29 +136,28 @@ extension HomeScreen {
     
     private func addChildToPerson() {
         let context = CoreDataManager.shared.context
-
+        
         if let personCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell {
-                    updatePersonData(from: personCell)
-                    savePerson()
-                }
-
+            updatePersonData(from: personCell)
+            savePerson()
+        }
+        
         if tempChildren.count >= maxChildrenCount {
             print("Max Children Reached")
             return
         }
-
+        
         let newChild = CoreDataChild(context: context)
         newChild.name = "Новое имя"
         newChild.age = "0"
         newChild.parent = person
-
+        
         tempChildren.append(newChild)
         
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
-
-
+    
     private func saveChildData(child: CoreDataChild) {
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
@@ -171,7 +168,7 @@ extension HomeScreen {
         
         person.name = person.name ?? "SampleName"
         person.age = person.age ?? "30"
-
+        
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
@@ -186,7 +183,7 @@ extension HomeScreen {
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
-
+    
     private func deletePerson() {
         //guard let person = person else { return }
         //let context = CoreDataManager.shared.context

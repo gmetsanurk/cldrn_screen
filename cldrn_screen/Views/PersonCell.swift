@@ -6,7 +6,7 @@ class PersonCell: UICollectionViewCell {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Дети (макс. 5)"
+        label.text =  NSLocalizedString("person_cell.child_max", comment: "Maximum child label")
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.textColor = AppColors.childCellTextColor
         return label
@@ -14,7 +14,7 @@ class PersonCell: UICollectionViewCell {
     
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("+ Добавить ребенка", for: .normal)
+        button.setTitle(NSLocalizedString("person_cell.add_child", comment: "Add child button"), for: .normal)
         button.layer.borderColor = UIColor.systemBlue.cgColor
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 20
@@ -61,8 +61,8 @@ class PersonCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.setupNameTextField(placeholder: "Имя")
-        ageTextField.setupNameTextField(placeholder: "Возраст", isNumeric: true)
+        nameTextField.setupNameTextField(placeholder: NSLocalizedString("person_cell.name_placeholder", comment: "Name placeholder"))
+        ageTextField.setupNameTextField(placeholder: NSLocalizedString("person_cell.age_placeholder", comment: "Age placeholder"), isNumeric: true)
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
@@ -99,7 +99,7 @@ class PersonCell: UICollectionViewCell {
     }
     
     func onAddChildTapped() {
-        print("Нажата кнопка 'Добавить ребенка' внутри PersonCell")
+        print("AddChild pressed inside PersonCell")
         onAddChild?()
     }
 }

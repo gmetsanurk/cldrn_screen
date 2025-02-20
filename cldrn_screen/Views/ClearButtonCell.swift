@@ -6,7 +6,7 @@ class ClearButtonCell: UICollectionViewCell {
     
     private let clearButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Очистить", for: .normal)
+        button.setTitle(NSLocalizedString("clear_button_cell.clear_button", comment: "Clear Button"), for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.layer.borderColor = UIColor.systemRed.cgColor
         button.layer.borderWidth = 2

@@ -48,22 +48,22 @@ class ChildCell: UICollectionViewCell {
     }
     
     private func setupTextFieldsUI() {
-        nameTextField.setupNameTextField(placeholder: " Имя")
-        ageTextField.setupNameTextField(placeholder: " Возраст", isNumeric: true)
+        nameTextField.setupNameTextField(placeholder: NSLocalizedString("child_cell.name_placeholder", comment: "Name placeholder"))
+        ageTextField.setupNameTextField(placeholder: NSLocalizedString("child_cell.age_placeholder", comment: "Age placeholder"), isNumeric: true)
         
         stackView.addArrangedSubview(nameTextField)
         stackView.addArrangedSubview(ageTextField)
     }
     
     private func setupDeleteButton() {
-        deleteButton.setTitle("Удалить", for: .normal)
+        deleteButton.setTitle(NSLocalizedString("child_cell.delete_button", comment: "ChildCell delete button"), for: .normal)
         deleteButton.addAction(UIAction { [weak self] _ in
             self?.onDelete?()
         }, for: .primaryActionTriggered)
     }
     
     private func setupSaveButton() {
-        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.setTitle(NSLocalizedString("child_cell.save_button", comment: "ChildCell dave button"), for: .normal)
         saveButton.addAction(UIAction { [weak self] _ in
             self?.onSave?()
             //self?.isHidden = true

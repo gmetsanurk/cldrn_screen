@@ -26,7 +26,7 @@ class HomeViewModel {
                 self.viewController?.reloadCollectionView()
             }
             
-            print("персона: \(self.person?.name ?? "нет имени"), дети: \(self.tempChildren.count)")
+            print("person: \(self.person?.name ?? "no name"), children: \(self.tempChildren.count)")
         } catch {
             print("Data load error: \(error.localizedDescription)")
         }
@@ -42,7 +42,7 @@ class HomeViewModel {
     }
     
     func updateChildData(from cell: ChildCell, at index: Int) {
-        tempChildren[index].name = cell.nameTextField.text ?? "Без имени"
+        tempChildren[index].name = cell.nameTextField.text ?? "no_name"
         tempChildren[index].age = cell.ageTextField.text ?? "0"
         saveData()
     }
@@ -66,7 +66,7 @@ class HomeViewModel {
         }
         
         let newChild = CoreDataChild(context: context)
-        newChild.name = "Новое имя"
+        newChild.name = "new name"
         newChild.age = "0"
         newChild.parent = person
         

@@ -3,11 +3,11 @@
     <entity name="CoreDataChild" representedClassName="CoreDataChild" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataPerson"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataPerson" inverseName="children" inverseEntity="CoreDataPerson"/>
     </entity>
     <entity name="CoreDataPerson" representedClassName="CoreDataPerson" syncable="YES">
         <attribute name="age" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="children" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataChild"/>
+        <relationship name="children" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreDataChild" inverseName="parent" inverseEntity="CoreDataChild"/>
     </entity>
 </model>

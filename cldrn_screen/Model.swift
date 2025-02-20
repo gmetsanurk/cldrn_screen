@@ -5,7 +5,7 @@ import CoreData
 public class CoreDataPerson: NSManagedObject {
     @NSManaged public var name: String?
     @NSManaged public var age: String?
-    @NSManaged public var children: NSSet
+    @NSManaged public var children: NSSet?
 }
 
 @objc(CoreDataChild)

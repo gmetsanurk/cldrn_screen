@@ -100,7 +100,6 @@ class PersonCell: UICollectionViewCell {
     
     func onAddChildTapped() {
         print("Нажата кнопка 'Добавить ребенка' внутри PersonCell")
-        savePerson()
         onAddChild?()
     }
     

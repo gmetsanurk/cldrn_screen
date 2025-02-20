@@ -13,7 +13,7 @@ class HomeScreen: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         view.backgroundColor = UIColor.white
-        loadDataFromCoreData()
+        //loadDataFromCoreData()
     }
     
     private func setupCollectionView() {
@@ -93,9 +93,34 @@ extension HomeScreen: UICollectionViewDelegate {
     }
 }
 
+
+
 //MARK: Transfer it to HomePresenter
 extension HomeScreen {
-    
+
+    private func loadDataFromCoreData() {
+        let context = CoreDataManager.shared.context
+        let fetchRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
+        
+        do {
+            let people = try context.fetch(fetchRequest)
+            self.person = people.first
+            self.tempChildren.removeAll()
+            
+            if let person = self.person, let childrenSet = person.children as? Set<CoreDataChild> {
+                self.tempChildren = Array(childrenSet.prefix(maxChildrenCount))
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            
+            print("данные загружены, персона: \(self.person?.name ?? "нет имени"), дети \(self.tempChildren.count)")
+        } catch {
+            print("ошибка загрузки данных: \(error.localizedDescription)")
+        }
+    }
+
     private func updatePersonData(from cell: PersonCell) {
         if person == nil {
             let context = CoreDataManager.shared.context
@@ -111,35 +136,19 @@ extension HomeScreen {
         tempChildren[index].age = cell.ageTextField.text ?? "0"
     }
     
-    private func loadDataFromCoreData() {
-        let context = CoreDataManager.shared.context
-        let personRequest: NSFetchRequest<CoreDataPerson> = CoreDataPerson.fetchRequest() as! NSFetchRequest<CoreDataPerson>
-        
-        do {
-            let fetchedPersons = try context.fetch(personRequest)
-            
-            if let firstPerson = fetchedPersons.first {
-                self.person = firstPerson
-                self.tempChildren = firstPerson.children.allObjects as? [CoreDataChild] ?? []
-            } else {
-                self.person = nil
-                self.tempChildren = []
-            }
-            
-            collectionView.reloadData()
-        } catch {
-            print("Ошибка загрузки данных: \(error)")
-        }
-    }
-
-
     private func addChildToPerson() {
+        let context = CoreDataManager.shared.context
+
         if let personCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as? PersonCell {
-            updatePersonData(from: personCell)
-            savePerson()
+                    updatePersonData(from: personCell)
+                    savePerson()
+                }
+
+        if tempChildren.count >= maxChildrenCount {
+            print("Max Children Reached")
+            return
         }
 
-        let context = CoreDataManager.shared.context
         let newChild = CoreDataChild(context: context)
         newChild.name = "Новое имя"
         newChild.age = "0"
@@ -152,7 +161,6 @@ extension HomeScreen {
     }
 
 
-    
     private func saveChildData(child: CoreDataChild) {
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
@@ -163,11 +171,10 @@ extension HomeScreen {
         
         person.name = person.name ?? "SampleName"
         person.age = person.age ?? "30"
-        
+
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
-    
     
     private func deleteChild(at index: Int) {
         let context = CoreDataManager.shared.context
@@ -179,20 +186,30 @@ extension HomeScreen {
         CoreDataManager.shared.saveContext()
         collectionView.reloadData()
     }
-    
+
     private func deletePerson() {
-        guard let person = person else { return }
+        //guard let person = person else { return }
+        //let context = CoreDataManager.shared.context
         
-        let context = CoreDataManager.shared.context
-        
-        for child in tempChildren {
-            context.delete(child)
-        }
-        
-        context.delete(person)
-        
+        deleteAllData()
         CoreDataManager.shared.saveContext()
-        collectionView.reloadData()
+        loadDataFromCoreData()
+    }
+    
+    private func deleteAllData() {
+        let context = CoreDataManager.shared.context
+        let entityNames = ["CoreDataPerson", "CoreDataChild"]
+        
+        do {
+            for entityName in entityNames {
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                try context.execute(deleteRequest)
+            }
+            context.reset()
+            try context.save()
+        } catch {
+            print("Error deleteAllData: \(error.localizedDescription)")
+        }
     }
 }
-
